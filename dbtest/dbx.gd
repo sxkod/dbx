@@ -2,7 +2,7 @@ extends Node
 
 #USAGE: See dbtest.gd
 #LICENSE: MIT
-#VERSION: 0.1
+#VERSION: 0.1.1
 #DEV: S Kodela
 
 #TODO : 
@@ -26,14 +26,14 @@ class dbx:
 			return db[key]
 		else:
 			return null
-			
+
 	func mget(xkeys):
 		var res=[]
 		for n in db.keys():
 			if n in xkeys:
 				res.append(db[n])
 		return res
-		
+
 	func remove(key):
 		if key in db:
 			db.erase(key)
@@ -45,7 +45,7 @@ class dbx:
 
 
 	func load(data):
-		pass
+		db=data
 
 	func query(params):
 		var res=[]
@@ -60,7 +60,6 @@ class dbx:
 			elif params[n][0]=="and":
 				if len(res[n])>0:
 					if len(restmp)>0:
-						#now test intersections - to be done
 						var lastone=restmp[len(restmp)-1]
 						var thisone=res[n]						
 						if len(restmp[len(restmp)-1])>0:
@@ -86,7 +85,7 @@ class dbx:
 			for m in n:
 				ret[m]=true
 		return ret.keys()
-		
+
 	func testcond(cond):
 		var res=[]
 		for n in db.keys():
@@ -101,6 +100,8 @@ class dbx:
 				if db[n][cond[1]]>cond[3]:res.append(n)
 			elif cond[2]==">=":
 				if db[n][cond[1]]>=cond[3]:res.append(n)
+			elif cond[2]=="!=":
+				if db[n][cond[1]]!=cond[3]:res.append(n)
 		return res
-		
-		
+
+
