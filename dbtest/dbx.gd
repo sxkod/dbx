@@ -14,7 +14,9 @@ extends Node
 class dbx:
 
 	var db={}
-	
+	const EPSILON_VALUE=0.001
+	const FLOAT_FORMAT = "%0.4f"
+
 	func _init():
 		pass
 
@@ -88,20 +90,36 @@ class dbx:
 
 	func testcond(cond):
 		var res=[]
+		var tst=cond[3]
+		var op=cond[2]
+		
 		for n in db.keys():
-			if cond[2]=="<":
-				if db[n][cond[1]]<cond[3]:res.append(n)
-			elif cond[2]=="<=":
-				if db[n][cond[1]]<=cond[3]:
-					res.append(n)
-			elif cond[2]=="==":
-				if db[n][cond[1]]==cond[3]:res.append(n)
-			elif cond[2]==">":
-				if db[n][cond[1]]>cond[3]:res.append(n)
-			elif cond[2]==">=":
-				if db[n][cond[1]]>=cond[3]:res.append(n)
-			elif cond[2]=="!=":
-				if db[n][cond[1]]!=cond[3]:res.append(n)
+			var fld=db[n][cond[1]]
+
+			if typeof(tst)==TYPE_REAL and typeof(fld)==TYPE_REAL:
+				fld=FLOAT_FORMAT % fld
+				tst=FLOAT_FORMAT % tst
+			else:
+				tst=cond[3]
+
+			if op=="<":
+				if fld<tst:res.append(n)
+
+			elif op=="<=":
+				if fld<=tst:res.append(n)
+
+			elif op=="==":
+				if fld==tst:res.append(n)
+
+			elif op==">":
+				if fld>tst:res.append(n)
+
+			elif op==">=":
+				if fld>=tst:res.append(n)
+
+			elif op=="!=":
+				if fld!=tst:res.append(n)
+
 		return res
 
 
