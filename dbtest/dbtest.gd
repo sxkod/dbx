@@ -36,6 +36,7 @@ func _ready():
 	x.put("dude1",{"age":45,"ht":5.1,"wt":190})
 	x.put("dude2",{"age":46,"ht":5.2,"wt":200})
 
+	print("\n\n")
 
 	#query the database
 	var res=x.query([  ["and","ht","!=",5.3], ["and","ht","!=",5.5] ])
@@ -56,7 +57,27 @@ func _ready():
 	res=x.query([  ["or","xid","==",2], ["or","xid","==",3] ])
 	print("got these from new db on or ",res)
 
+	print("\n\n")
 
+	#lets cause some errors and print them
+	x.put("test",[{"name":"duder5","xid":5}])
+	x.print_errors()
+	x.clear_errors()
+	print("--------------------")
+	res=x.query([  "or","xid","==",2 ])
+	x.print_errors()
+	x.clear_errors()
+	print("--------------------")
+	res=x.query([  ["blah","xid","==",2] ])
+	x.print_errors()
+	x.clear_errors()
+	print("--------------------")
+	res=x.query([  ["or","xid","+=",2] ])
+	x.print_errors()
+	x.clear_errors()
+	print("--------------------")
+	
+	
 func _process(delta):
 	OS.delay_msec(100)
 	get_tree().quit()
