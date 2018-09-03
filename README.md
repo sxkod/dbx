@@ -1,6 +1,6 @@
 # dbx
 
-# current version 0.1.4
+# current version 0.1.5
 
 An extremely simple database facility for godot
 
