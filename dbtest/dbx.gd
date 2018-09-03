@@ -2,7 +2,7 @@ extends Node
 
 #USAGE: See dbtest.gd
 #LICENSE: MIT
-#VERSION: 0.1.1
+#VERSION: 0.1.2
 #DEV: S Kodela
 
 #TODO : 
@@ -10,6 +10,10 @@ extends Node
 # - facility to load and save data??
 # - 
 #
+#Changes:
+#changed insert() to put() to keep the wording consistent - 
+# get(), put(), mget(), del(), mdel() etc
+#changed load to create, to remove confusion from native load reserved word
 
 class dbx:
 
@@ -36,17 +40,17 @@ class dbx:
 				res.append(db[n])
 		return res
 
-	func remove(key):
+	func del(key):
 		if key in db:
 			db.erase(key)
 
-	func mremove(keys):
+	func mdel(keys):
 		for key in keys:
 			if key in db:
 				db.erase(key)
 
 
-	func load(data):
+	func create(data):
 		db=data
 
 	func query(params):

@@ -10,9 +10,10 @@ func _ready():
 	x.put("dude4",{"age":48,"ht":5.4,"wt":220})
 	x.put("dude5",{"age":49,"ht":5.5,"wt":230})
 	
-
+	x.del("dude4")
+	print("getting the deleted ",x.get("dude4"))
 	var res=x.query([  ["and","ht","!=",5.3], ["and","ht","!=",5.5] ])
-	print("float ",x.mget(res))
+	print("float ",res)
 
 
 func _process(delta):
