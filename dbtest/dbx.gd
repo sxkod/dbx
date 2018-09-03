@@ -20,7 +20,7 @@ class dbx:
 	func _init():
 		pass
 
-	func insert(key,data):
+	func put(key,data):
 		db[key]=data
 
 	func get(key):
