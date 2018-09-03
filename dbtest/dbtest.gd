@@ -53,23 +53,11 @@ func _ready():
 	res=x.query([  ["and","xid",">=",2] ])
 	print("got these from new db ",res)
 
+	res=x.query([  ["or","xid","==",2], ["or","xid","==",3] ])
+	print("got these from new db on or ",res)
 
 
 func _process(delta):
 	OS.delay_msec(100)
 	get_tree().quit()
 
-#	var test=["and","wt","<=",210]	
-#	var res=x.query([test])
-#	print(res)
-#
-#	res=x.query([  ["and","age","<=",48], ["and","wt",">=",210] ])
-#	print(res)
-#
-#	x.remove("dude2")
-#	test=["and","wt","<=",250]	
-#	res=x.query([test])
-#	print(res)
-#
-#	res=x.mget(["dude1","dude3","dude5"])
-#	print(res)
